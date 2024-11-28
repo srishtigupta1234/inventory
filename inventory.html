@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory</title>
+    <style>
+        body{
+            text-align: center;
+            background-color: rgb(254, 238, 219);
+        }
+        #box{
+            text-align: center;
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 20px;
+        }
+        #box>div{
+            border: 1px solid black;
+        }
+        img{
+            width: 100%;
+            height:70%;
+        }
+        button:hover{
+            background-color: rgb(250, 119, 119);
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Inventory</h1>
+    <div id="box"></div>
+</body>
+</html>
+<script>
+    //Get the data .
+
+    let append = (data) =>{
+        let box = document.getElementById("box");
+        box.innerHTML= null;
+        data.forEach((el,index) => {
+            let div = document.createElement('div');
+            let img = document.createElement('img');
+            img.setAttribute("src",el.url);
+            let name = document.createElement("h3");
+            name.innerText= el.name;
+            let price = document.createElement("h4");
+            price.innerText = "$" + el.price;
+            let button = document.createElement("button");
+            button.innerText = "Remove";
+            button.onclick = () =>{
+                remove(index)
+            }
+            div.append(img,name,price,button);
+            box.append(div)
+        });
+        
+    }
+    let remove = (index) =>{
+        let data = JSON.parse(localStorage.getItem("data"))
+        data.splice(index,1)
+        localStorage.setItem("data",JSON.stringify(data))
+        append(append)
+        
+    }
+    let main=()=>{
+        let data = JSON.parse(localStorage.getItem("data"))
+        
+        append(data);
+    }
+    //Append the dom
+    
+    main();
+   //a: undefined var.
+   //b: temporal dead zone let -(TDZ) is a period of time when a variable exists in a scope but cannot be accessed until it is initialized
+
+</script>

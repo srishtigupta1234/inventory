@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS211</title>
+    <style>
+
+    </style>
+</head>
+<body>
+    <h1>Add Data</h1>
+    <input type="text" placeholder="Name" id="name">
+    <input type="text" placeholder="Price" id="price">
+    <input type="text" placeholder ='image url' id="img">
+    <button id="submit" onclick="submit()">Submit</button>
+</body>
+</html>
+<script>
+    //Local storage - if there is only one object to store in ls we can stare it pushing it to array.
+    //Inventory system
+    //Input Data in the forms
+    //Data will be stored in the localstorage.
+    //Fetch this data and append to the DOM.
+    //in arrow function this will always refer to global object.
+    
+    function Product(name,price,url){
+       this.name  = name;
+       this.price = price;
+       this.url = url;
+    }
+    
+    let submit = () =>{
+        let name = document.getElementById("name").value;
+        let price = document.getElementById("price").value;
+        let url = document.getElementById("img").value;
+        //Constructor function
+        let p = new Product(name,price,url);
+        let data = JSON.parse(localStorage.getItem('data')) || [];
+        data.push(p)
+        localStorage.setItem('data',JSON.stringify(data))
+        console.log(p);
+        
+    }
+</script>
